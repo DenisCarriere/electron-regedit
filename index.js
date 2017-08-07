@@ -6,7 +6,7 @@ const regedit = require('./lib/regedit')
  *
  * @param {string|string[]} keys Registry Key
  * @param {string|string[]} [subKeys] Will only delete subKey if present
- * @returns {Promise<Object>} Status
+ * @returns {Promise<string>} Regedit Text
  */
 function deleteKey (keys, subKeys) {
   return utils.writePromise(regedit.deleteKey(keys, subKeys))
@@ -17,7 +17,7 @@ function deleteKey (keys, subKeys) {
  *
  * @param {string|string[]} keys Registry Key
  * @param {string|string[]} [subKeys] Will only delete subKey if present
- * @returns {Object} Status
+ * @returns {string} Regedit Text
  */
 function deleteKeySync (keys, subKeys) {
   return utils.writeSync(regedit.deleteKey(keys, subKeys))

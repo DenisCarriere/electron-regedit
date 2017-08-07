@@ -2,8 +2,8 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const test = require('tape')
-const regedit = require('./lib/regedit')
 const utils = require('./lib/utils')
+const regedit = require('./lib/regedit')
 const registryEditor = require('./')
 
 switch (os.platform()) {

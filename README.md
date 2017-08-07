@@ -1,6 +1,6 @@
 # Registry Editor
 
-[![Build Status](https://travis-ci.org/DenisCarriere/registry-editor.svg?branch=master)](https://travis-ci.org/DenisCarriere/registry-editor)
+[![Build status](https://ci.appveyor.com/api/projects/status/8o4uepes2o8d4dky?svg=true)](https://ci.appveyor.com/project/DenisCarriere/registry-editor)
 [![npm version](https://badge.fury.io/js/registry-editor.svg)](https://badge.fury.io/js/registry-editor)
 [![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/registry-editor/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/registry-editor?branch=master)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/registry-editor/master/LICENSE)
@@ -20,6 +20,12 @@ $ npm install registry-editor
 
 ```js
 const registryEditor = require('registry-editor')
+
+// Promise
+await registryEditor.deleteKey('HKLM', ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
+
+// Sync
+registryEditor.deleteKeySync('HKLM', ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
 ```
 
 ## API
@@ -35,7 +41,7 @@ Promise => Delete Registry Key
 -   `keys` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>)** Registry Key
 -   `subKeys` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** Will only delete subKey if present
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** Status
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>** Regedit Text
 
 ### deleteKeySync
 
@@ -46,4 +52,4 @@ Sync => Delete Registry Key
 -   `keys` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>)** Registry Key
 -   `subKeys` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** Will only delete subKey if present
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Status
+Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Regedit Text
