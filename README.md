@@ -8,7 +8,7 @@
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-Cross platform Registry Editor for NodeJS written in pure ES5 Javascript with zero dependencies.
+Cross platform Registry Editor for NodeJS >4 with zero dependencies.
 
 ## Install
 
@@ -22,7 +22,9 @@ $ npm install registry-editor
 const registryEditor = require('registry-editor')
 
 // Promise
-await registryEditor.deleteKey('HKLM', ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
+registryEditor.deleteKey('HKLM', ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
+  .then(regedit => console.log(regedit))
+  .catch(error => console.log(error))
 
 // Sync
 registryEditor.deleteKeySync('HKLM', ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
