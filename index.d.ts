@@ -5,5 +5,7 @@ export type RootKeys =
   'HKU'  | 'HKEY_USERS' |
   'HKCC' | 'HKEY_CURRENT_CONFIG'
 
-export function deleteKey(keys: RootKeys | RootKeys[], subKeys: string | string[]): Promise<string>
-export function deleteKeySync(keys: RootKeys | RootKeys[], subKeys: string | string[]): string
+export function deleteKey(rootKeys: RootKeys | RootKeys[], subKeys: string | string[]): Promise<string>
+export function deleteKeySync(rootKeys: RootKeys | RootKeys[], subKeys: string | string[]): string
+export function setValueKey(rootKey: RootKeys, subKey: string, json: any): Promise<string>
+export function setValueKeySync(rootKey: RootKeys, subKey: string, json: any): string

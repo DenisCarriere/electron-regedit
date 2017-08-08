@@ -1,14 +1,21 @@
-import {deleteKey, deleteKeySync} from './'
+import * as registryEditor from './'
 
 /**
  * Delete Key
  */
-deleteKey('HKCR', 'SOFTWARE\\Foo')
+registryEditor.deleteKey('HKCR', 'SOFTWARE\\Foo')
   .then(regegit => regegit)
   .catch(error => error)
-deleteKey(['HKCR', 'HKCU'], 'SOFTWARE\\Foo')
-deleteKey(['HKCR', 'HKCU'], ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
-deleteKeySync('HKCR', 'SOFTWARE\\Foo')
-deleteKeySync(['HKCR', 'HKCU'], 'SOFTWARE\\Foo')
+registryEditor.deleteKey(['HKCR', 'HKCU'], 'SOFTWARE\\Foo')
+registryEditor.deleteKey(['HKCR', 'HKCU'], ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
+registryEditor.deleteKeySync('HKCR', 'SOFTWARE\\Foo')
+registryEditor.deleteKeySync(['HKCR', 'HKCU'], 'SOFTWARE\\Foo')
+registryEditor.deleteKeySync(['HKCR', 'HKCU'], ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
 
-const regegit = deleteKeySync(['HKCR', 'HKCU'], ['SOFTWARE\\Foo', 'SOFTWARE\\Bar'])
+/**
+ * Set Key Value
+ */
+registryEditor.setValueKey('HKCR', 'SOFTWARE\\Foo', {hello: 'world'})
+  .then(regedit => regedit)
+  .catch(error => error)
+registryEditor.setValueKeySync('HKCR', 'SOFTWARE\\Foo', {hello: 'world'})

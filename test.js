@@ -21,6 +21,18 @@ switch (os.platform()) {
         .catch(error => t.fail(error))
       t.end()
     })
+    test('setKeyValue', t => {
+      try {
+        registryEditor.setKeyValueSync('HKLM', 'SOFTWARE\\Bar', {helloSync: 'world'})
+        t.pass('setKeyValue -- sync')
+      } catch (error) {
+        t.fail(error)
+      }
+      registryEditor.setKeyValue('HKLM', 'SOFTWARE\\Bar', {helloPromise: {foo: 'world'}})
+        .then(status => t.pass('setKeyValue -- promise'))
+        .catch(error => t.fail(error))
+      t.end()
+    })
 }
 
 test('regedit -- deleteKey', t => {
@@ -31,15 +43,23 @@ test('regedit -- deleteKey', t => {
   t.end()
 })
 
-test('utils -- rootKey', t => {
-  t.equal(utils.rootKey('HKEY_LOCAL_MACHINE'), 'HKEY_LOCAL_MACHINE', 'rootKey => HKEY_LOCAL_MACHINE')
-  t.equal(utils.rootKey('HKCR'), 'HKEY_CLASSES_ROOT', 'rootKey => HKCR')
-  t.equal(utils.rootKey('HKCU'), 'HKEY_CURRENT_USER', 'rootKey => HKCU')
-  t.equal(utils.rootKey('HKLM'), 'HKEY_LOCAL_MACHINE', 'rootKey => HKLM')
-  t.equal(utils.rootKey('HKU'), 'HKEY_USERS', 'rootKey => HKU')
-  t.equal(utils.rootKey('HKCC'), 'HKEY_CURRENT_CONFIG', 'rootKey => HKCC')
-  t.throws(() => utils.rootKey('HKxx'), 'rootKey => HKxx')
-  t.throws(() => utils.rootKey(undefined), 'rootKey => undefined')
-  t.throws(() => utils.rootKey(null), 'rootKey => null')
+test('regedit -- setKeyValue', t => {
+  const reg = regedit.setKeyValue('HKLM', 'SOFTWARE\\Foo', {hello: 'world'})
+  const output = path.join(__dirname, 'test', 'out', 'setKeyValue.reg')
+  if (process.env.REGEN) fs.writeFileSync(output, reg)
+  t.equal(reg, fs.readFileSync(output, 'utf8'))
+  t.end()
+})
+
+test('utils -- parseRootKey', t => {
+  t.equal(utils.parseRootKey('HKEY_LOCAL_MACHINE'), 'HKEY_LOCAL_MACHINE', 'parseRootKey => HKEY_LOCAL_MACHINE')
+  t.equal(utils.parseRootKey('HKCR'), 'HKEY_CLASSES_ROOT', 'parseRootKey => HKCR')
+  t.equal(utils.parseRootKey('HKCU'), 'HKEY_CURRENT_USER', 'parseRootKey => HKCU')
+  t.equal(utils.parseRootKey('HKLM'), 'HKEY_LOCAL_MACHINE', 'parseRootKey => HKLM')
+  t.equal(utils.parseRootKey('HKU'), 'HKEY_USERS', 'parseRootKey => HKU')
+  t.equal(utils.parseRootKey('HKCC'), 'HKEY_CURRENT_CONFIG', 'parseRootKey => HKCC')
+  t.throws(() => utils.parseRootKey('HKxx'), 'parseRootKey => HKxx')
+  t.throws(() => utils.parseRootKey(undefined), 'parseRootKey => undefined')
+  t.throws(() => utils.parseRootKey(null), 'parseRootKey => null')
   t.end()
 })

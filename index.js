@@ -4,23 +4,23 @@ const regedit = require('./lib/regedit')
 /**
  * Promise => Delete Registry Key
  *
- * @param {string|string[]} keys Registry Key
+ * @param {string|string[]} rootKeys Registry Key
  * @param {string|string[]} subKeys SubKey
  * @returns {Promise<string>} Regedit Text
  */
-function deleteKey (keys, subKeys) {
-  return utils.writePromise(regedit.deleteKey(keys, subKeys))
+function deleteKey (rootKeys, subKeys) {
+  return utils.writePromise(regedit.deleteKey(rootKeys, subKeys))
 }
 
 /**
  * Sync => Delete Registry Key
  *
- * @param {string|string[]} keys Registry Key
+ * @param {string|string[]} rootKeys Root Registry Key
  * @param {string|string[]} subKeys SubKey
  * @returns {string} Regedit Text
  */
-function deleteKeySync (keys, subKeys) {
-  return utils.writeSync(regedit.deleteKey(keys, subKeys))
+function deleteKeySync (rootKeys, subKeys) {
+  return utils.writeSync(regedit.deleteKey(rootKeys, subKeys))
 }
 
 // /**
@@ -45,19 +45,33 @@ function deleteKeySync (keys, subKeys) {
 //   keys.forEach(key => console.log(key))
 // }
 
-// /**
-//  * Set Key Value
-//  *
-//  * @param {string} key Registry Key ('HKEY_LOCAL_MACHINE', 'HKLM')
-//  * @param {string} subKey Sub Registry key
-//  * @param {string} value Value
-//  * @param {string} [type='REG_SZ'] Registry Type
-//  */
-// function setKeyValue (key, subKey, value, type) {
+/**
+ * Promise => Set Key Value
+ *
+ * @param {string} rootKey Root Key ('HKEY_LOCAL_MACHINE')
+ * @param {string} subKey Sub Registry key ('SOFTWARE\Application')
+ * @param {Object} json JSON Object as Key/Value
+ * @returns {Promise<string>} Regedit Text
+ */
+function setKeyValue (rootKey, subKey, json) {
+  return utils.writePromise(regedit.setKeyValue(rootKey, subKey, json))
+}
 
-// }
+/**
+ * Sync => Set Key Value
+ *
+ * @param {string} rootKey Root Key ('HKEY_LOCAL_MACHINE')
+ * @param {string} subKey Sub Registry key ('SOFTWARE\Application')
+ * @param {Object} json JSON Object as Key/Value
+ * @returns {string} Regedit Text
+ */
+function setKeyValueSync (rootKey, subKey, json) {
+  return utils.writeSync(regedit.setKeyValue(rootKey, subKey, json))
+}
 
 module.exports = {
   deleteKey: deleteKey,
-  deleteKeySync: deleteKeySync
+  deleteKeySync: deleteKeySync,
+  setKeyValue: setKeyValue,
+  setKeyValueSync: setKeyValueSync
 }
