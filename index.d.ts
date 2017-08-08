@@ -7,5 +7,5 @@ export type RootKeys =
 
 export function deleteKey(rootKeys: RootKeys | RootKeys[], subKeys: string | string[]): Promise<string>
 export function deleteKeySync(rootKeys: RootKeys | RootKeys[], subKeys: string | string[]): string
-export function setValueKey(rootKey: RootKeys, subKey: string, json: any): Promise<string>
-export function setValueKeySync(rootKey: RootKeys, subKey: string, json: any): string
+export function setKeyValue(rootKey: RootKeys, subKey: string, json: any): Promise<string>
+export function setKeyValueSync(rootKey: RootKeys, subKey: string, json: any): string
