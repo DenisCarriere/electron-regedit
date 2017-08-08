@@ -1,13 +1,13 @@
 {
   "name": "registry-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cross platform Registry Editor for NodeJS >4 with zero dependencies.",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.js",
     "index.d.ts",
-    "bin"
+    "lib"
   ],
   "scripts": {
     "pretest": "standard",
